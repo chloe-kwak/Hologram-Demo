@@ -1,9 +1,0 @@
-faiss-cpu
-transformers
-Pillow
-pypdf
-jq
-streamlit
-botocore
-boto3
-awscli
