@@ -1,0 +1,8 @@
+# Ignore files starting with underscore
+_*
+
+# .tmp 확장자 파일 무시
+*.tmp
+
+# log 파일 무시
+*.log
