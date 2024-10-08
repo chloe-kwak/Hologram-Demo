@@ -1,0 +1,1508 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "cdk-hologram-display": {
+        "id": "cdk-hologram-display",
+        "path": "cdk-hologram-display",
+        "children": {
+          "cdk-hologram-displayAppVpc": {
+            "id": "cdk-hologram-displayAppVpc",
+            "path": "cdk-hologram-display/cdk-hologram-displayAppVpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "cdk-hologram-display-stl-vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.114.1"
+                }
+              },
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.0.0/18",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet1RouteTableDB0894EA"
+                        },
+                        "subnetId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet1SubnetAB0883C1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "cdkhologramdisplayAppVpcIGW5AE2CEFC"
+                        },
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet1RouteTableDB0894EA"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "cdkhologramdisplayAppVpcPublicSubnet1EIP880F2C27",
+                            "AllocationId"
+                          ]
+                        },
+                        "subnetId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet1SubnetAB0883C1"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.114.1"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.64.0/18",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet2RouteTable52917BC4"
+                        },
+                        "subnetId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet2Subnet6A4FCF80"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PublicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "cdkhologramdisplayAppVpcIGW5AE2CEFC"
+                        },
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet2RouteTable52917BC4"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.114.1"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.128.0/18",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPrivateSubnet1RouteTable3738CD35"
+                        },
+                        "subnetId": {
+                          "Ref": "cdkhologramdisplayAppVpcPrivateSubnet1SubnetE39935C5"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet1NATGateway66B35E5F"
+                        },
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPrivateSubnet1RouteTable3738CD35"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.114.1"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.192.0/18",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "cdkhologramdisplayAppVpc247733EB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPrivateSubnet2RouteTable29F2F214"
+                        },
+                        "subnetId": {
+                          "Ref": "cdkhologramdisplayAppVpcPrivateSubnet2Subnet533ADC78"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/PrivateSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "cdkhologramdisplayAppVpcPublicSubnet1NATGateway66B35E5F"
+                        },
+                        "routeTableId": {
+                          "Ref": "cdkhologramdisplayAppVpcPrivateSubnet2RouteTable29F2F214"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.114.1"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "cdk-hologram-display-stl-vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.114.1"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "internetGatewayId": {
+                      "Ref": "cdkhologramdisplayAppVpcIGW5AE2CEFC"
+                    },
+                    "vpcId": {
+                      "Ref": "cdkhologramdisplayAppVpc247733EB"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.114.1"
+                }
+              },
+              "RestrictDefaultSecurityGroupCustomResource": {
+                "id": "RestrictDefaultSecurityGroupCustomResource",
+                "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/RestrictDefaultSecurityGroupCustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAppVpc/RestrictDefaultSecurityGroupCustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.114.1"
+            }
+          },
+          "Custom::VpcRestrictDefaultSGCustomResourceProvider": {
+            "id": "Custom::VpcRestrictDefaultSGCustomResourceProvider",
+            "path": "cdk-hologram-display/Custom::VpcRestrictDefaultSGCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "cdk-hologram-display/Custom::VpcRestrictDefaultSGCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.114.1"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "cdk-hologram-display/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.114.1"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "cdk-hologram-display/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProvider",
+              "version": "2.114.1"
+            }
+          },
+          "cdk-hologram-displaySecurityGroupECS": {
+            "id": "cdk-hologram-displaySecurityGroupECS",
+            "path": "cdk-hologram-display/cdk-hologram-displaySecurityGroupECS",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "cdk-hologram-display/cdk-hologram-displaySecurityGroupECS/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "cdk-hologram-display/cdk-hologram-displaySecurityGroupECS",
+                    "groupName": "cdk-hologram-display-stl-ecs-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "cdkhologramdisplayAppVpc247733EB"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.114.1"
+                }
+              },
+              "from cdkhologramdisplaycdkhologramdisplaySecurityGroupALBC43EDC6B:8501": {
+                "id": "from cdkhologramdisplaycdkhologramdisplaySecurityGroupALBC43EDC6B:8501",
+                "path": "cdk-hologram-display/cdk-hologram-displaySecurityGroupECS/from cdkhologramdisplaycdkhologramdisplaySecurityGroupALBC43EDC6B:8501",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "ALB traffic",
+                    "fromPort": 8501,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "cdkhologramdisplaySecurityGroupECSE9A06096",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "tcp",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "cdkhologramdisplaySecurityGroupALB47C2CF30",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 8501
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.114.1"
+            }
+          },
+          "cdk-hologram-displaySecurityGroupALB": {
+            "id": "cdk-hologram-displaySecurityGroupALB",
+            "path": "cdk-hologram-display/cdk-hologram-displaySecurityGroupALB",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "cdk-hologram-display/cdk-hologram-displaySecurityGroupALB/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "cdk-hologram-display/cdk-hologram-displaySecurityGroupALB",
+                    "groupName": "cdk-hologram-display-stl-alb-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 80,
+                        "toPort": 80,
+                        "description": "Allow from anyone on port 80"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "cdkhologramdisplayAppVpc247733EB"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.114.1"
+            }
+          },
+          "cdk-hologram-displayCluster": {
+            "id": "cdk-hologram-displayCluster",
+            "path": "cdk-hologram-display/cdk-hologram-displayCluster",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "cdk-hologram-display/cdk-hologram-displayCluster/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                  "aws:cdk:cloudformation:props": {}
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                  "version": "2.114.1"
+                }
+              },
+              "cdk-hologram-displayCluster": {
+                "id": "cdk-hologram-displayCluster",
+                "path": "cdk-hologram-display/cdk-hologram-displayCluster/cdk-hologram-displayCluster",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::ClusterCapacityProviderAssociations",
+                  "aws:cdk:cloudformation:props": {
+                    "capacityProviders": [
+                      "FARGATE",
+                      "FARGATE_SPOT"
+                    ],
+                    "cluster": {
+                      "Ref": "cdkhologramdisplayCluster2842017B"
+                    },
+                    "defaultCapacityProviderStrategy": []
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnClusterCapacityProviderAssociations",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecs.Cluster",
+              "version": "2.114.1"
+            }
+          },
+          "cdk-hologram-displayAlb": {
+            "id": "cdk-hologram-displayAlb",
+            "path": "cdk-hologram-display/cdk-hologram-displayAlb",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "cdk-hologram-display/cdk-hologram-displayAlb/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+                  "aws:cdk:cloudformation:props": {
+                    "loadBalancerAttributes": [
+                      {
+                        "key": "deletion_protection.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "name": "cdk-hologram-display-stl",
+                    "scheme": "internet-facing",
+                    "securityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "cdkhologramdisplaySecurityGroupALB47C2CF30",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnets": [
+                      {
+                        "Ref": "cdkhologramdisplayAppVpcPublicSubnet1SubnetAB0883C1"
+                      },
+                      {
+                        "Ref": "cdkhologramdisplayAppVpcPublicSubnet2Subnet6A4FCF80"
+                      }
+                    ],
+                    "type": "application"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnLoadBalancer",
+                  "version": "2.114.1"
+                }
+              },
+              "cdk-hologram-displayHttpListener": {
+                "id": "cdk-hologram-displayHttpListener",
+                "path": "cdk-hologram-display/cdk-hologram-displayAlb/cdk-hologram-displayHttpListener",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAlb/cdk-hologram-displayHttpListener/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
+                      "aws:cdk:cloudformation:props": {
+                        "defaultActions": [
+                          {
+                            "type": "fixed-response",
+                            "fixedResponseConfig": {
+                              "statusCode": "403",
+                              "contentType": "text/plain",
+                              "messageBody": "Access denied"
+                            }
+                          }
+                        ],
+                        "loadBalancerArn": {
+                          "Ref": "cdkhologramdisplayAlbE3D139B6"
+                        },
+                        "port": 80,
+                        "protocol": "HTTP"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListener",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "cdk-hologram-displayTargetGroupGroup": {
+                    "id": "cdk-hologram-displayTargetGroupGroup",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAlb/cdk-hologram-displayHttpListener/cdk-hologram-displayTargetGroupGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "cdk-hologram-display/cdk-hologram-displayAlb/cdk-hologram-displayHttpListener/cdk-hologram-displayTargetGroupGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "name": "cdk-hologram-display-tg",
+                            "port": 8501,
+                            "protocol": "HTTP",
+                            "targetGroupAttributes": [
+                              {
+                                "key": "stickiness.enabled",
+                                "value": "false"
+                              }
+                            ],
+                            "targetType": "ip",
+                            "vpcId": {
+                              "Ref": "cdkhologramdisplayAppVpc247733EB"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                          "version": "2.114.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "cdk-hologram-displayTargetGroupRule": {
+                    "id": "cdk-hologram-displayTargetGroupRule",
+                    "path": "cdk-hologram-display/cdk-hologram-displayAlb/cdk-hologram-displayHttpListener/cdk-hologram-displayTargetGroupRule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "cdk-hologram-display/cdk-hologram-displayAlb/cdk-hologram-displayHttpListener/cdk-hologram-displayTargetGroupRule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "cdkhologramdisplayAlbcdkhologramdisplayHttpListenercdkhologramdisplayTargetGroupGroupED633F68"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "http-header",
+                                "httpHeaderConfig": {
+                                  "httpHeaderName": "X-Custom-Header",
+                                  "values": [
+                                    "My_random_value_58dsv15e4s38"
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "cdkhologramdisplayAlbcdkhologramdisplayHttpListenerD6E0644C"
+                            },
+                            "priority": 1
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.114.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListener",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer",
+              "version": "2.114.1"
+            }
+          },
+          "cdk-hologram-displayWebappTaskDef": {
+            "id": "cdk-hologram-displayWebappTaskDef",
+            "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef",
+            "children": {
+              "TaskRole": {
+                "id": "TaskRole",
+                "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/TaskRole",
+                "children": {
+                  "ImportTaskRole": {
+                    "id": "ImportTaskRole",
+                    "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/TaskRole/ImportTaskRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/TaskRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ecs-tasks.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonBedrockFullAccess"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.114.1"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                  "aws:cdk:cloudformation:props": {
+                    "containerDefinitions": [
+                      {
+                        "essential": true,
+                        "image": {
+                          "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:1c815dc5d1a1101fb6642442c5a6862d386f093f1976cb8415bd5ce97864c2fa"
+                        },
+                        "name": "cdk-hologram-displayWebContainer",
+                        "portMappings": [
+                          {
+                            "containerPort": 8501,
+                            "protocol": "tcp"
+                          }
+                        ],
+                        "logConfiguration": {
+                          "logDriver": "awslogs",
+                          "options": {
+                            "awslogs-group": {
+                              "Ref": "cdkhologramdisplayWebappTaskDefcdkhologramdisplayWebContainerLogGroupA40E7FFB"
+                            },
+                            "awslogs-stream-prefix": "WebContainerLogs",
+                            "awslogs-region": {
+                              "Ref": "AWS::Region"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "cpu": "256",
+                    "executionRoleArn": {
+                      "Fn::GetAtt": [
+                        "cdkhologramdisplayWebappTaskDefExecutionRoleC9593A47",
+                        "Arn"
+                      ]
+                    },
+                    "family": "cdkhologramdisplaycdkhologramdisplayWebappTaskDef18F0934D",
+                    "memory": "512",
+                    "networkMode": "awsvpc",
+                    "requiresCompatibilities": [
+                      "FARGATE"
+                    ],
+                    "taskRoleArn": {
+                      "Fn::GetAtt": [
+                        "cdkhologramdisplayWebappTaskDefTaskRole2C46B5AF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
+                  "version": "2.114.1"
+                }
+              },
+              "cdk-hologram-displayWebContainer": {
+                "id": "cdk-hologram-displayWebContainer",
+                "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/cdk-hologram-displayWebContainer",
+                "children": {
+                  "AssetImage": {
+                    "id": "AssetImage",
+                    "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/cdk-hologram-displayWebContainer/AssetImage",
+                    "children": {
+                      "Staging": {
+                        "id": "Staging",
+                        "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/cdk-hologram-displayWebContainer/AssetImage/Staging",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.114.1"
+                        }
+                      },
+                      "Repository": {
+                        "id": "Repository",
+                        "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/cdk-hologram-displayWebContainer/AssetImage/Repository",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
+                          "version": "2.114.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "LogGroup": {
+                    "id": "LogGroup",
+                    "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/cdk-hologram-displayWebContainer/LogGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/cdk-hologram-displayWebContainer/LogGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                          "aws:cdk:cloudformation:props": {}
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                          "version": "2.114.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                  "version": "2.114.1"
+                }
+              },
+              "ExecutionRole": {
+                "id": "ExecutionRole",
+                "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/ExecutionRole",
+                "children": {
+                  "ImportExecutionRole": {
+                    "id": "ImportExecutionRole",
+                    "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/ExecutionRole/ImportExecutionRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/ExecutionRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ecs-tasks.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/ExecutionRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "cdk-hologram-display/cdk-hologram-displayWebappTaskDef/ExecutionRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "ecr:BatchCheckLayerAvailability",
+                                    "ecr:BatchGetImage",
+                                    "ecr:GetDownloadUrlForLayer"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":ecr:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":",
+                                        {
+                                          "Ref": "AWS::AccountId"
+                                        },
+                                        ":repository/",
+                                        {
+                                          "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "ecr:GetAuthorizationToken",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                },
+                                {
+                                  "Action": [
+                                    "logs:CreateLogStream",
+                                    "logs:PutLogEvents"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "cdkhologramdisplayWebappTaskDefcdkhologramdisplayWebContainerLogGroupA40E7FFB",
+                                      "Arn"
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "cdkhologramdisplayWebappTaskDefExecutionRoleDefaultPolicy487016BF",
+                            "roles": [
+                              {
+                                "Ref": "cdkhologramdisplayWebappTaskDefExecutionRoleC9593A47"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.114.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecs.FargateTaskDefinition",
+              "version": "2.114.1"
+            }
+          },
+          "cdk-hologram-displayECSService": {
+            "id": "cdk-hologram-displayECSService",
+            "path": "cdk-hologram-display/cdk-hologram-displayECSService",
+            "children": {
+              "Service": {
+                "id": "Service",
+                "path": "cdk-hologram-display/cdk-hologram-displayECSService/Service",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::Service",
+                  "aws:cdk:cloudformation:props": {
+                    "cluster": {
+                      "Ref": "cdkhologramdisplayCluster2842017B"
+                    },
+                    "deploymentConfiguration": {
+                      "maximumPercent": 200,
+                      "minimumHealthyPercent": 50,
+                      "alarms": {
+                        "alarmNames": [],
+                        "enable": false,
+                        "rollback": false
+                      }
+                    },
+                    "enableEcsManagedTags": false,
+                    "healthCheckGracePeriodSeconds": 60,
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                      {
+                        "targetGroupArn": {
+                          "Ref": "cdkhologramdisplayAlbcdkhologramdisplayHttpListenercdkhologramdisplayTargetGroupGroupED633F68"
+                        },
+                        "containerName": "cdk-hologram-displayWebContainer",
+                        "containerPort": 8501
+                      }
+                    ],
+                    "networkConfiguration": {
+                      "awsvpcConfiguration": {
+                        "assignPublicIp": "DISABLED",
+                        "subnets": [
+                          {
+                            "Ref": "cdkhologramdisplayAppVpcPrivateSubnet1SubnetE39935C5"
+                          },
+                          {
+                            "Ref": "cdkhologramdisplayAppVpcPrivateSubnet2Subnet533ADC78"
+                          }
+                        ],
+                        "securityGroups": [
+                          {
+                            "Fn::GetAtt": [
+                              "cdkhologramdisplaySecurityGroupECSE9A06096",
+                              "GroupId"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "serviceName": "cdk-hologram-display-stl-front",
+                    "taskDefinition": {
+                      "Ref": "cdkhologramdisplayWebappTaskDefC1A727F4"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnService",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecs.FargateService",
+              "version": "2.114.1"
+            }
+          },
+          "cdk-hologram-displayCfDist": {
+            "id": "cdk-hologram-displayCfDist",
+            "path": "cdk-hologram-display/cdk-hologram-displayCfDist",
+            "children": {
+              "Origin1": {
+                "id": "Origin1",
+                "path": "cdk-hologram-display/cdk-hologram-displayCfDist/Origin1",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.3.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "cdk-hologram-display/cdk-hologram-displayCfDist/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
+                  "aws:cdk:cloudformation:props": {
+                    "distributionConfig": {
+                      "enabled": true,
+                      "origins": [
+                        {
+                          "domainName": {
+                            "Fn::GetAtt": [
+                              "cdkhologramdisplayAlbE3D139B6",
+                              "DNSName"
+                            ]
+                          },
+                          "id": "cdkhologramdisplaycdkhologramdisplayCfDistOrigin1F413CB2D",
+                          "originCustomHeaders": [
+                            {
+                              "headerName": "X-Custom-Header",
+                              "headerValue": "My_random_value_58dsv15e4s38"
+                            }
+                          ],
+                          "customOriginConfig": {
+                            "originSslProtocols": [
+                              "TLSv1.2"
+                            ],
+                            "originProtocolPolicy": "http-only"
+                          },
+                          "originShield": {
+                            "enabled": false
+                          }
+                        }
+                      ],
+                      "defaultCacheBehavior": {
+                        "pathPattern": "*",
+                        "targetOriginId": "cdkhologramdisplaycdkhologramdisplayCfDistOrigin1F413CB2D",
+                        "allowedMethods": [
+                          "GET",
+                          "HEAD",
+                          "OPTIONS",
+                          "PUT",
+                          "PATCH",
+                          "POST",
+                          "DELETE"
+                        ],
+                        "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+                        "compress": true,
+                        "originRequestPolicyId": "216adef6-5c7f-47e4-b989-5492eafa07d3",
+                        "viewerProtocolPolicy": "redirect-to-https"
+                      },
+                      "httpVersion": "http2",
+                      "ipv6Enabled": true
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.CfnDistribution",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
+              "version": "2.114.1"
+            }
+          },
+          "CloudFrontDistributionURL": {
+            "id": "CloudFrontDistributionURL",
+            "path": "cdk-hologram-display/CloudFrontDistributionURL",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.114.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "cdk-hologram-display/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "cdk-hologram-display/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.114.1"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "cdk-hologram-display/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "cdk-hologram-display/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.114.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "cdk-hologram-display/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.114.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.114.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.114.1"
+    }
+  }
+}
