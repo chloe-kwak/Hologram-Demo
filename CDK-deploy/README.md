@@ -1,4 +1,4 @@
-# CDK로 Chatbot 배포하기
+# CDK로 홀로그램 디스플레이 솔루션 배포하기
 
 이 앱은 웹 인터페이스를 통해 Amazon Bedrock Claude 3 챗봇I데모를 쉽게 생성하고 배포하는 시작점으로 사용할 수 있습니다. 
 파이썬으로만 작성되었으며, AWS에 배포하기 위한 cdk 템플릿이 포함되어 있습니다.
@@ -23,7 +23,7 @@ docker_app 폴더에서 Streamlit 앱을 찾을 수 있습니다. 로컬에서 �
 * python 3.8
 * docker
 * use a Chrome browser for development
-* AWS 계정에서 `anthropic.claude-v3` 모델이 <b>us-west-2 리전</b>에 활성화 되어 있어야 합니다.
+* AWS 계정에서 `anthropic.claude-v3` 모델이 <b>us-east-1 리전</b>에 활성화 되어 있어야 합니다.
 * 이 데모를 생성하는 데 사용된 환경은 Amazon Linux 2023이 설치된 AWS Cloud9 m5.large 인스턴스이지만 다른 구성에서도 작동합니다.
 
 ## 배포 방법 (AWS Cloud9 환경 추천) :
@@ -32,9 +32,9 @@ docker_app 폴더에서 Streamlit 앱을 찾을 수 있습니다. 로컬에서 �
 ### 1. git clone
 
 ```
-git clone https://github.com/jesamkim/simple-bedrock-chatbot.git
+git clone https://github.com/chloe-kwak/Hologram-Demo.git 
 
-cd simple-bedrock-chatbot/CDK-deploy
+cd CDK-deploy/CDK-deploy
 
 ```
 (optional) Edit `docker_app/config_file.py`, choose a `STACK_NAME` and a `CUSTOM_HEADER_VALUE`.
@@ -50,18 +50,9 @@ pip install -r requirements.txt
 
 ```
 
-### 3. Google 검색을 위한 API 설정
-[필수] Google 검색 기능을 사용하기 위해 각자 사전에 발급받은 <b>[GOOGLE_ENGINE_ID](https://programmablesearchengine.google.com/controlpanel/all?hl=ko)와 [GOOGLE_API_KEY](https://developers.google.com/custom-search/v1/overview?hl=ko) </b>가 필요 합니다.
-`GOOGLE_ENGINE_ID`와 `GOOGLE_API_KEY` 값을 <b>simple-bedrock-chatbot/CDK-deploy/docker_app/search.py</b>에 넣어 수정 후 저장 합니다.
-```
-# Google API 키와 검색 엔진 ID를 환경 변수에서 가져옵니다.
-API_KEY = "YOUR_GOOGLE_API_KEY"
-SEARCH_ENGINE_ID = "YOUR_GOOGLE_ENGINE_ID"
-```
-
-### 4. CDK 템플릿 배포 
+### 3. CDK 템플릿 배포 
 - 배포는 서울 리전에 해도 됩니다.
-- Bedrock Claude 3 모델 access 권한 설정만 us-west-2에 미리 해두시면 됩니다.
+- Bedrock Claude 3 모델 access 권한 설정만 us-east-1에 미리 해두시면 됩니다.
 
 ```
 cdk bootstrap
@@ -72,17 +63,12 @@ cdk deploy
 
 CloudFront 배포 URL을 확인할 수 있습니다.
 
-### 5. 브라우저에서 CloudFront distribution URL에 연결합니다.
+### 4. 브라우저에서 CloudFront distribution URL에 연결합니다.
 ```
 # Output 예시
 Outputs:
-cdk-chatbot-claude3.CloudFrontDistributionURL = xxx2cj9ksuhwvn.cloudfront.net
+hologram-displaoy.CloudFrontDistributionURL = xxx2cj9ksuhwvn.cloudfront.net
 ```
-
-
-## 실행 화면
-![screenshot1](/CDK-deploy/img/screenshot1.png)
-
 
 <br>
 
